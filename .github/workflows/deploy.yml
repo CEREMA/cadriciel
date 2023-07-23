@@ -36,6 +36,11 @@ jobs:
             cerema/machinasapiens:latest
           cache-from: type=gha
           cache-to: type=gha,mode=max
+          build-args: |
+            DEV=${{ secrets.CI_CLIENT_DEV }}
+            CI_CLIENT_ID=${{ secrets.CI_CLIENT_ID }}
+            CI_ORION_URI=${{ secrets.CI_ORION_URI }}
+            CI_ENVIRONMENT_URL=${{ secrets.CI_ENVIRONMENT_URL }}
 #      - name: Deploy
 #        uses: WyriHaximus/github-action-helm3@v2.0
 #        with:
