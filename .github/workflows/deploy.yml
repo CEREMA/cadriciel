@@ -2,8 +2,8 @@ name: cadriciel-ci
 
 on:
   push:
-    paths:
-      - './**'
+    branches:
+      - main
 
 jobs:
   docker:
