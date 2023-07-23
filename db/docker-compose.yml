@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  # dev data machinasapiens
+  db:
+    image: postgres:15
+    ports:
+      - 3535:5432
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=postgres
+    volumes:
+      - pg1:/var/lib/postgresql/data
+  # testing migration
+  db2:
+    image: postgres:15
+    ports:
+      - 3536:5432
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=postgres
+    volumes:
+      - pg2:/var/lib/postgresql/data
+volumes:
+  pg1:
+  pg2:

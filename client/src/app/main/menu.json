@@ -1,0 +1,13 @@
+[
+  {
+    "label": "GENERAL",
+    "icon": "pi pi-star-fill",
+    "items": [
+      {
+        "label": "Mon profil",
+        "icon": "pi pi-user",
+        "routerLink": ["/pages/demo"]
+      }
+    ]
+  }
+]

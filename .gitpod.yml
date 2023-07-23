@@ -1,0 +1,21 @@
+image:
+  file: .gitpod.Dockerfile
+
+# List the ports you want to expose and what to do when they are served. See https://www.gitpod.io/docs/config-ports/
+ports:
+  - port: 5432
+    onOpen: ignore
+  - port: 3000
+    onOpen: open-preview
+
+# List the start up tasks. You can start them in parallel in multiple terminals. See https://www.gitpod.io/docs/config-start-tasks/
+tasks:
+  - init: npm install
+    command: npm run dev
+  - init: echo "init script" && sleep 1
+    command: psql -h localhost -d postgres -U gitpod -c "CREATE DATABASE my_database;"
+
+# You can also install vscode extensions in your gitpod. See https://www.gitpod.io/docs/vscode-extensions/
+vscode:
+  extensions:
+    - dbaeumer.vscode-eslint@1.9.1:ho9K6c4n7KGJ4Nt0bUO8w==

@@ -1,0 +1,84 @@
+@import '~@nebular/theme/styles/theming';
+@import '~@nebular/theme/styles/themes/default';
+
+$taille-principale: 0.8125rem;
+
+$nb-themes: nb-register-theme(
+    (
+      // tree grid
+      tree-grid-cell-padding: 0.6125rem 0.875rem,
+      tree-grid-header-text-font-size: $taille-principale,
+      // menu and navbar
+      menu-item-padding: 0.75rem 0.8rem,
+      header-height: 4.15rem,
+      //
+      text-paragraph-font-size: $taille-principale,
+      layout-padding: 1.075rem 1.075rem 0.75rem,
+      text-subtitle-2-font-size: $taille-principale,
+      //select
+      select-medium-text-font-size: $taille-principale,
+      select-medium-text-font-weight : normal,
+      select-medium-text-line-height: 1rem,
+      //input
+      input-medium-text-font-weight : normal,
+      input-medium-text-line-height: 1rem,
+      //radio
+      radio-text-font-weight : normal,
+      radio-text-line-height: 1rem,
+      //option
+      option-medium-text-font-size: $taille-principale,
+      option-medium-text-font-weight : normal,
+      //tooltip
+      tooltip-max-width: 20rem,
+    ),
+    default,
+    default
+);
+
+
+h1 {
+  font-size: 1.8rem;
+}
+
+:root {
+  --content-bg-color: #F7F9FA;
+  --table-even-row-color: #F1F1F1;
+  --card-info-color: #DFE6ED;
+}
+
+a {
+  text-decoration: none;
+}
+
+.stepper-arrivee {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .header {
+    width: 80%;
+  }
+
+  .step-content {
+    width: 100%;
+  }
+}
+
+.tableau th, td {
+  padding: 0.6125rem 0.875rem;
+}
+
+.header-tableau, td {
+  text-align: center;
+}
+
+.select-column {
+  label {
+    width: 0;
+  }
+}
+
+nb-dialog-container {
+  overflow: auto !important;
+  margin: 2rem 0;
+}

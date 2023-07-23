@@ -1,0 +1,19 @@
+annotations:
+  category: webapp
+apiVersion: v2
+appVersion: 2.3.3
+
+name: machinasapiens
+description: MACHINASAPIENS
+version: 1.0.0
+
+home: https://www.cerema.fr
+icon: https://oasis.cerema.fr/images/LogoCerema_horizontal.svg
+keywords:
+  - Site web
+  - MACHINASAPIENS
+
+maintainers:
+  - email: admin@cerema.fr
+    name: CEREMA
+

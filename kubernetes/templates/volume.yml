@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: vol-postgres
+  labels:
+    app: {{ .Release.Name }}-postgres
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: {{ .Values.storage }}    
+  resources:
+    requests:
+      storage: {{ .Values.app.db.size }}

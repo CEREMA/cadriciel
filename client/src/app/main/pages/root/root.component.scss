@@ -1,0 +1,24 @@
+.home {
+  opacity: 0.9;
+  //background-size: contain;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  //background-image: url(../../../../assets/images/logo.svg);
+}
+.logo {
+  background-size: contain;
+  width: 100%;
+  height: 200px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-image: url(../../../../assets/images/logo.svg);
+}
+.bold {
+  font-weight: bold;
+  margin-bottom: -2px;
+}
+
+.subtitle {
+  font-size: 20px;
+}

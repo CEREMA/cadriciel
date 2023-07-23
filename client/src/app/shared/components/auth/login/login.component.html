@@ -1,0 +1,15 @@
+<div class="flex h-screen w-screen align-items-center justify-content-center">
+  <div *ngIf="!canNavigate" class="card">
+    <h5>Votre utilisateur n'a pas de droit dans l'application. Veuillez contacter l'administrateur.</h5>
+    <div class="flex justify-content-center col-12">
+      <button pButton pRipple label="Contacter l'administrateur" (click)="contacterAdministrateur()">
+        <i class="pi pi-envelope mr-3"></i>
+      </button>
+    </div>
+  </div>
+  <div *ngIf="canNavigate">
+    <img src="/assets/layout/images/SpinnerCerema.svg">
+  </div>
+</div>
+
+<app-config [minimal]="true"></app-config>
