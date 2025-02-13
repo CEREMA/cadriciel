@@ -1,6 +1,0 @@
-roles:
-    - admin
-    - guest
-role:
-  - guest: 
-    - all

@@ -1,6 +1,0 @@
-{
-  "watch": "./",
-  "ext": "js,json,yml,yaml,html,css",
-  "verbose": true,
-  "ignore": ["node_modules/", "tmp/", "client/"]
-}
