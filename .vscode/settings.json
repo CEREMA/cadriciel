@@ -1,6 +1,0 @@
-{
-  "angular.enable-strict-mode-prompt": false,
-  "kanban": {
-    "openOnStartup": false
-  }
-}
