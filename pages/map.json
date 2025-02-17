@@ -1,0 +1,9 @@
+{
+  "imports": ["leaflet", "@bluehalo/ngx-leaflet", "@types/leaflet"],
+  "styles": ["./node_modules/leaflet/dist/leaflet.css"],
+  "assets": [
+    "node_modules/leaflet/dist/images/marker-shadow.png",
+    "node_modules/leaflet/dist/images/marker-icon-2x.png",
+    "node_modules/leaflet/dist/images/marker-icon.png"
+  ]
+}
