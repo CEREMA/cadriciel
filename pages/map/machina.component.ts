@@ -33,7 +33,7 @@ export class MachinaComponent implements AfterViewInit {
   };
 
   private map!: Map;
-  private geoJsonLayer: GeoJSON;
+  private geoJsonLayer: GeoJSON | null = null;
 
   private createPopupContent(properties: any): string {
     let content = '<div>';
@@ -92,7 +92,9 @@ export class MachinaComponent implements AfterViewInit {
             });
           },
           mouseout: (e: any) => {
-            this.geoJsonLayer.resetStyle(e.target);
+            if (this.geoJsonLayer) {
+              this.geoJsonLayer.resetStyle(e.target);
+            }
           },
           click: (e: any) => {
             this.map.fitBounds(e.target.getBounds());
