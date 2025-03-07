@@ -1,4 +1,4 @@
-import { Component, AfterViewInit } from '@angular/core';
+import { Component, AfterViewInit, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { LeafletModule } from '@bluehalo/ngx-leaflet';
@@ -12,6 +12,8 @@ import L, {
   Icon,
   Marker,
 } from 'leaflet';
+import { ActivatedRoute, Params } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   standalone: true,
@@ -20,20 +22,43 @@ import L, {
   templateUrl: './machina.component.html',
   styleUrls: ['./machina.component.scss'],
 })
-export class MachinaComponent implements AfterViewInit {
+export class MachinaComponent implements OnInit, AfterViewInit, OnDestroy {
+  private routeSub: Subscription | undefined;
+  public paramId: string | null = null;
+
   options = {
     layers: [
       tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 18,
-        attribution: '&copy; OpenStreetMap contributors',
+        attribution: '© OpenStreetMap contributors',
       }),
     ],
-    zoom: 6, // Niveau de zoom pour voir la France entière
-    center: latLng(46.227638, 2.213749), // Centre de la France
+    zoom: 6,
+    center: latLng(46.227638, 2.213749),
   };
 
   private map!: Map;
   private geoJsonLayer: GeoJSON | null = null;
+
+  constructor(private route: ActivatedRoute) {
+    console.log('MachinaComponent initialisé.');
+  }
+
+  ngOnInit(): void {
+    this.routeSub = this.route.params.subscribe((params: Params) => {
+      this.paramId = params['id'] || null;
+      this.initWithParams(params);
+    });
+  }
+
+  private initWithParams(params: Params): void {
+    if (this.paramId) {
+      console.log(`Initialisation avec l'ID: ${this.paramId}`);
+      // Ici, vous pourriez charger des données GeoJSON spécifiques basées sur l'ID
+      // Par exemple :
+      // this.loadGeoJsonData(this.paramId);
+    }
+  }
 
   private createPopupContent(properties: any): string {
     let content = '<div>';
@@ -62,12 +87,10 @@ export class MachinaComponent implements AfterViewInit {
   }
 
   addGeoJson(geojsonData: any) {
-    // Si un layer existe déjà, on le retire
     if (this.geoJsonLayer) {
       this.map.removeLayer(this.geoJsonLayer);
     }
 
-    // Options de style pour le GeoJSON
     const geojsonOptions = {
       style: (feature: any) => ({
         color: '#3388ff',
@@ -76,12 +99,10 @@ export class MachinaComponent implements AfterViewInit {
         fillOpacity: 0.5,
       }),
       onEachFeature: (feature: any, layer: Layer) => {
-        // Popup si propriétés présentes
         if (feature.properties) {
           layer.bindPopup(this.createPopupContent(feature.properties));
         }
 
-        // Événements au survol
         layer.on({
           mouseover: (e: any) => {
             const layer = e.target;
@@ -103,21 +124,16 @@ export class MachinaComponent implements AfterViewInit {
       },
     };
 
-    // Création du layer GeoJSON
     this.geoJsonLayer = geoJSON(geojsonData, geojsonOptions).addTo(this.map);
-
-    // Zoom sur l'étendue du GeoJSON
     this.map.fitBounds(this.geoJsonLayer.getBounds());
   }
 
   onMapReady(map: Map) {
     this.map = map;
-    // Configuration du chemin des icônes
     const iconRetinaUrl = 'assets/images/marker-icon-2x.png';
     const iconUrl = 'assets/images/marker-icon.png';
     const shadowUrl = 'assets/images/marker-shadow.png';
 
-    // Configuration par défaut pour les icônes
     L.Marker.prototype.options.icon = L.icon({
       iconRetinaUrl,
       iconUrl,
@@ -131,7 +147,6 @@ export class MachinaComponent implements AfterViewInit {
   }
 
   ngAfterViewInit() {
-    // Permettre au DOM de se mettre à jour
     setTimeout(() => {
       if (this.map) {
         this.map.invalidateSize();
@@ -139,9 +154,12 @@ export class MachinaComponent implements AfterViewInit {
     }, 100);
   }
 
-  ngOnInit() {}
-
-  constructor() {
-    console.log('MachinaComponent initialisé.');
+  ngOnDestroy(): void {
+    if (this.routeSub) {
+      this.routeSub.unsubscribe();
+    }
+    if (this.geoJsonLayer) {
+      this.map.removeLayer(this.geoJsonLayer);
+    }
   }
 }
