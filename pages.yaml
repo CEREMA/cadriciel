@@ -1,0 +1,7 @@
+items:
+  - name: blank
+    title: Blank
+    description: Page vierge
+  - name: map
+    title: Carte
+    description: Carte interactive (leaflet)
