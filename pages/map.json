@@ -1,5 +1,5 @@
 {
-  "imports": ["leaflet", "@bluehalo/ngx-leaflet", "@types/leaflet"],
+  "imports": ["leaflet", "@asymmetrik/ngx-leaflet", "@types/leaflet"],
   "styles": ["./node_modules/leaflet/dist/leaflet.css"],
   "assets": [
     "node_modules/leaflet/dist/images/marker-shadow.png",
