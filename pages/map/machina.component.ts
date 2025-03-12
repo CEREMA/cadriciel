@@ -1,7 +1,7 @@
 import { Component, AfterViewInit, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { LeafletModule } from '@bluehalo/ngx-leaflet';
+import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 import L, {
   Map,
   geoJSON,
