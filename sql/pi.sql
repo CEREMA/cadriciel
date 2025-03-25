@@ -4,7 +4,7 @@ CREATE TABLE points_interet (
     nom VARCHAR(100),
     description TEXT,
     categorie VARCHAR(50),
-    geom GEOGRAPHY(Point, 4326)
+    geom GEOMETRY(Point, 4326)
 );
 
 -- Insertion de 20 enregistrements avec échappement correct des apostrophes
