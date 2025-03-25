@@ -5,12 +5,12 @@ themes:
       - title: bdtheque
         description: Base de données de bandes dessinées
         locate: sql/bdtheque.sql
-      - title: xxx
-        description: description
-        locate: sql/create_table_xxx.sql
+      - title: Blogs
+        description: Base de données démo de blogs
+        locate: sql/demoblog.sql
   - title: Modèles
     description: Modèles de requêtes SQL
     items:
-      - title: xxx
-        description: description
+      - title: Création de table
+        description: Template de création de table
         locate: sql/create_table_xxx.sql
