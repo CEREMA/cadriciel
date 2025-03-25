@@ -8,6 +8,9 @@ themes:
       - title: Blogs
         description: Base de données démo de blogs
         locate: sql/demoblog.sql
+      - title: Points d'intérêt
+        description: Base de données de points d'intérêt
+        locate: sql/pi.sql
   - title: Modèles
     description: Modèles de requêtes SQL
     items:
