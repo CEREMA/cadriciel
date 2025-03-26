@@ -1,5 +1,5 @@
 themes:
-  - title: Base de données
+  - title: Base de données (démo)
     description: Modèles de base de données
     items:
       - title: bdtheque
