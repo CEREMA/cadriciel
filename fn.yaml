@@ -1,7 +1,8 @@
 themes:
   - title: Modèles
-    description: Modèles de requêtes SQL
+    description: Modèles de fonctions SQL
     items:
       - title: Fonction politique d’accès
         description: Fonction PostgreSQL standard servant de base pour créer une règle d’accès personnalisée.
         locate: fn/policy.sql
+        return: boolean
