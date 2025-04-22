@@ -1,5 +1,5 @@
 themes:
-  - title: Modèles
+  - title: Fonctions
     description: Modèles de fonctions SQL
     items:
       - title: Fonction politique d’accès
@@ -8,3 +8,12 @@ themes:
       - title: Vérifier si l’utilisateur appartient à une liste de rôles
         description: auth.has_role(role_names[])
         locate: fn/has_role.sql
+  - title: Triggers
+    description: Modèles de triggers SQL
+    items:
+      - title: Trigger de mise à jour de la date de modification
+        description: Met à jour la colonne `updated_at` lors de la mise à jour d'une ligne.
+        locate: fn/trigger_update_timestamp.sql
+      - title: Trigger de mise à jour de la date de création
+        description: Met à jour la colonne `created_at` lors de l'insertion d'une ligne.
+        locate: fn/trigger_insert_timestamp.sql
