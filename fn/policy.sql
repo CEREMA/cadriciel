@@ -1,15 +1,21 @@
-  DECLARE
-    result boolean;
+CREATE OR REPLACE FUNCTION [schema].[fonction]()
+RETURNS BOOLEAN
+LANGUAGE plpgsql
+AS $$
+DECLARE
+    result BOOLEAN;
 
-  BEGIN
+BEGIN
     
-    SELECT EXISTS(
-
-        -- Votre requête SQL
-        -- SELECT 1 FROM ...
-
-    ) INTO result;
+    SELECT EXISTS (
+    
+        -- ta fonction SQL
+        -- exemple:
+        -- SELECT 1 FROM [schema].[table] WHERE ...
+    
+    )
+    INTO resut;
 
     RETURN result;
-
-  END;
+END;
+$$;
