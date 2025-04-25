@@ -1,4 +1,4 @@
-CREATE OR REPLACE FUNCTION auth.has_role(role_names TEXT[])
+CREATE OR REPLACE FUNCTION auth.is_admin()
 RETURNS BOOLEAN
 LANGUAGE plpgsql
 AS $$
@@ -13,7 +13,7 @@ BEGIN
         JOIN auth.users u ON p.utilisateur_id = u.id
         JOIN auth.roles r ON p.role_id = r.id
         WHERE u.orion_id = auth.uid()
-          AND r.name = ANY(role_names)
+          AND r.name = ANY(ARRAY['ADMIN'])
     )
     INTO resut;
 

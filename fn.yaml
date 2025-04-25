@@ -8,6 +8,9 @@ themes:
       - title: Vérifier si l’utilisateur appartient à une liste de rôles
         description: auth.has_role(role_names[])
         locate: fn/has_role.sql
+      - title: Vérifier si l’utilisateur est un ADMIN
+        description: auth.is_admin()
+        locate: fn/is_admin.sql
   - title: Triggers
     description: Modèles de triggers SQL
     items:
