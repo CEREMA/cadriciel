@@ -1,0 +1,7 @@
+themes:
+  - title: Démo
+    description: Edge functions de démonstration
+    items:
+      - title: Hello World
+        description: Microservice qui retourne "Hello World"
+        locate: functions/hello.ts
