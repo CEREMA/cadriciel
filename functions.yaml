@@ -1,7 +1,16 @@
 themes:
-  - title: Démo
+  - title: Démo Typescript
     description: Edge functions de démonstration
     items:
       - title: Hello World
         description: Microservice qui retourne "Hello World"
         locate: functions/hello.ts
+      - title: Query SELECT d'une table
+        description: Microservice qui retourne le contenu d'une table
+        locate: functions/db.query.ts
+  - title: Démo Python
+    description: Edge functions de démonstration
+    items:
+      - title: Hello World
+        description: Microservice qui retourne "Hello World"
+        locate: functions/hello.py
