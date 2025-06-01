@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-Microservice Hello World en Python avec FastAPI
-Exemple simple d'API REST avec quelques endpoints de base
+Microservice simple - Créateur de messages
+Un seul endpoint POST pour créer des messages
 """
 
 from fastapi import FastAPI, HTTPException
@@ -9,102 +9,67 @@ from pydantic import BaseModel
 from datetime import datetime
 import uvicorn
 import os
+import logging
 
-# Initialisation de l'app FastAPI
+# Configuration du logging
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(levelname)s - %(message)s'
+)
+logger = logging.getLogger(__name__)
+
+# App FastAPI
 app = FastAPI(
-    title="Hello World Microservice",
-    description="Un microservice simple avec FastAPI",
+    title="Message Creator Service",
+    description="Microservice pour créer des messages",
     version="1.0.0"
 )
 
-# Modèle Pydantic pour les données
-class Message(BaseModel):
+# Modèle de données
+class MessageRequest(BaseModel):
     text: str
-    timestamp: datetime = None
 
-# Base de données en mémoire (pour l'exemple)
-messages = []
+class MessageResponse(BaseModel):
+    id: str
+    text: str
+    timestamp: datetime
+    status: str
 
-# Routes
-@app.get("/")
-async def root():
-    """Endpoint racine - Hello World basique"""
-    return {
-        "message": "Hello World!",
-        "service": "Python Microservice",
-        "timestamp": datetime.now().isoformat()
-    }
+# Endpoint principal
+@app.post("/", response_model=MessageResponse)
+async def create_message(message: MessageRequest):
+    """Créer un nouveau message - endpoint principal du microservice"""
+    try:
+        # Génération d'un ID simple
+        message_id = f"msg_{int(datetime.now().timestamp())}"
+        
+        # Création du message
+        response = MessageResponse(
+            id=message_id,
+            text=message.text,
+            timestamp=datetime.now(),
+            status="created"
+        )
+        
+        logger.info(f"💬 Message créé: {message_id} - {message.text[:50]}...")
+        
+        return response
+        
+    except Exception as e:
+        logger.error(f"❌ Erreur: {str(e)}")
+        raise HTTPException(status_code=500, detail="Erreur lors de la création")
 
+# Health check minimal
 @app.get("/health")
-async def health_check():
-    """Health check pour monitoring"""
-    return {
-        "status": "healthy",
-        "timestamp": datetime.now().isoformat()
-    }
+async def health():
+    """Health check"""
+    return {"status": "healthy"}
 
-@app.get("/hello/{name}")
-async def hello_name(name: str):
-    """Salutation personnalisée"""
-    return {
-        "message": f"Hello {name}!",
-        "timestamp": datetime.now().isoformat()
-    }
-
-@app.post("/messages")
-async def create_message(message: Message):
-    """Créer un nouveau message"""
-    message.timestamp = datetime.now()
-    messages.append(message.dict())
-    return {
-        "status": "created",
-        "message": message.dict()
-    }
-
-@app.get("/messages")
-async def get_messages():
-    """Récupérer tous les messages"""
-    return {
-        "count": len(messages),
-        "messages": messages
-    }
-
-@app.get("/messages/{message_id}")
-async def get_message(message_id: int):
-    """Récupérer un message par ID"""
-    if message_id < 0 or message_id >= len(messages):
-        raise HTTPException(status_code=404, detail="Message not found")
-    
-    return {
-        "id": message_id,
-        "message": messages[message_id]
-    }
-
-@app.delete("/messages/{message_id}")
-async def delete_message(message_id: int):
-    """Supprimer un message par ID"""
-    if message_id < 0 or message_id >= len(messages):
-        raise HTTPException(status_code=404, detail="Message not found")
-    
-    deleted_message = messages.pop(message_id)
-    return {
-        "status": "deleted",
-        "message": deleted_message
-    }
-
-# Point d'entrée principal
+# Point d'entrée
 if __name__ == "__main__":
-    # Configuration du serveur
     port = int(os.getenv("PORT", 8000))
-    host = os.getenv("HOST", "127.0.0.1")
+    host = os.getenv("HOST", "0.0.0.0")
     
-    print(f"🚀 Démarrage du microservice sur http://{host}:{port}")
-    print("📖 Documentation API disponible sur http://127.0.0.1:8000/docs")
+    logger.info(f"🚀 Message Creator Service démarré sur {host}:{port}")
     
-    # Lancement du serveur
-    uvicorn.run(
-        app, 
-        host=host, 
-        port=port,
-        reload=True  # Auto-reload en développement
-    )
+    uvicorn.run(app, host=host, port=port, reload=False)
