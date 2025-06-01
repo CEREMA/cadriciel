@@ -1,5 +1,5 @@
 themes:
-  - title: Base de données (démo)
+  - title: Base de données (démo SQL)
     description: Modèles de base de données
     items:
       - title: bdtheque
@@ -11,7 +11,7 @@ themes:
       - title: Points d'intérêt
         description: Base de données de points d'intérêt
         locate: sql/pi.sql
-  - title: Modèles
+  - title: Modèles SQL
     description: Modèles de requêtes SQL
     items:
       - title: Création de table
